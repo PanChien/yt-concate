@@ -7,7 +7,7 @@ CHANNEL_ID = 'UCKSVUHI9rbbkXhvAXK-2uxA'  # 通常不會改變的東西，會使�
 
 
 def get_all_video_in_channel(channel_id):  # channel_di是要投入的參數
-    api_key = 'AIzaSyAjw8ANVConwvy1gjqDuO_X17QbcdG0sb8'  # 貼上你的API Key
+    api_key = API_KEY  # 貼上你的API Key
 
     base_video_url = 'https://www.youtube.com/watch?v='  # youtbe影片網址
     base_search_url = 'https://www.googleapis.com/youtube/v3/search?'  # 讓我們使用API的網址(API endpoint)
