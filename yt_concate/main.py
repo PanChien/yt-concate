@@ -1,7 +1,12 @@
-from yt_concate.pipline.steps.get_video_list import GetVideoList
-from yt_concate.pipline.steps.step import StepException
+from pytube import YouTube
 
+from yt_concate.pipline.steps.get_video_list import GetVideoList
+from yt_concate.pipline.steps.download_captions import DownLoadCaptions
+from yt_concate.pipline.steps.preflight import Preflight
+from yt_concate.pipline.steps.postflight import Postflight
+from yt_concate.pipline.steps.step import StepException
 from yt_concate.pipline.pipline import Pipline
+from yt_concate.utils import Utils
 
 CHANNEL_ID = 'UCKSVUHI9rbbkXhvAXK-2uxA'  # 通常不會改變的東西，會使用Global variable、全大寫
 
@@ -13,11 +18,15 @@ def main():
 
     # 使用多行式的清單格式時，建議每個後面都加入「,」
     steps = [
+        Preflight(),
         GetVideoList(),
+        DownLoadCaptions(),
+        Postflight(),
     ]
 
+    utils = Utils()
     p = Pipline(steps)
-    p.run(inputs)
+    p.run(inputs, utils)
 
 
 # main check，檢查這個程式是不是進入點
