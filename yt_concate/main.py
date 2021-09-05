@@ -1,8 +1,9 @@
 from pytube import YouTube
 
+from yt_concate.pipline.steps.preflight import Preflight
 from yt_concate.pipline.steps.get_video_list import GetVideoList
 from yt_concate.pipline.steps.download_captions import DownLoadCaptions
-from yt_concate.pipline.steps.preflight import Preflight
+from yt_concate.pipline.steps.read_caption import ReadCaption
 from yt_concate.pipline.steps.postflight import Postflight
 from yt_concate.pipline.steps.step import StepException
 from yt_concate.pipline.pipline import Pipline
@@ -21,6 +22,7 @@ def main():
         Preflight(),
         GetVideoList(),
         DownLoadCaptions(),
+        ReadCaption(),
         Postflight(),
     ]
 
