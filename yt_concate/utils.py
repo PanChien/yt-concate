@@ -22,16 +22,13 @@ class Utils:
         path = self.get_video_list_filepath(channel_id)
         return os.path.exists(path) and os.path.getsize(path) > 0
 
-    @staticmethod  # 可以不須要使用self的method
-    def get_video_id_from_url(url):  # 拿到video的id
-        return url.split('watch?v=')[-1]  # 使用split分割，會切出兩個list，而[-1]為倒數第一個的意思
-
-    def get_caption_filepath(self, url):  # 字幕的檔案的位置重組，return出完整路徑的.txt
-        return os.path.join(CAPTIONS_DIR, self.get_video_id_from_url(url) + '.txt')
-
-    def caption_file_exists(self, url):  # 檢查字幕檔是否存在，而且檔案容量要大於0
-        path = self.get_caption_filepath(url)
+    def caption_file_exists(self, yt):  # 檢查字幕檔是否存在，而且檔案容量要大於0
+        filepath = yt.caption_filepath
         # os.path.exists(path) 檢查檔案在不在
         # os.path.getsize(path) > 0 檢查這個檔案容量要大於0
         # and 邏輯運算子 要兩個都成立，才會回傳 True
-        return os.path.exists(path) and os.path.getsize(path) > 0
+        return os.path.exists(filepath) and os.path.getsize(filepath) > 0
+
+    def video_file_exists(self, yt):  # 檢查影片檔是否存在，而且檔案容量要大於0
+        filepath = yt.video_filepath
+        return os.path.exists(filepath) and os.path.getsize(filepath) > 0

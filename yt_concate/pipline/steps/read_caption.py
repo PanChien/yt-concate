@@ -1,16 +1,14 @@
-import os
-
-from pprint import pprint  # python內建的功能
-
 from .step import Step
-from yt_concate.settings import CAPTIONS_DIR
+
 
 class ReadCaption(Step):
     def process(self, data, inputs, utils):
-        data = {}  # key為檔名、value為字幕
-        for caption_file in os.listdir(CAPTIONS_DIR):
-            captions = {}  # key為其中一行的字幕、value為其中一行的時間，將儲存檔案裡的全部的字幕跟時間
-            with open(os.path.join(CAPTIONS_DIR, caption_file), 'r') as f:
+        for yt in data:
+            if not utils.caption_file_exists(yt):  # 如果沒有找到這個檔案，就跳過下一回
+                continue
+
+            captions = {}
+            with open(yt.caption_filepath, 'r') as f:
                 time_line = False  # 還沒拿到time時，為False
                 time = None  # 存time的文字用
                 caption = None  # 存caption的文字用
@@ -18,12 +16,12 @@ class ReadCaption(Step):
                     line = line.strip()
                     if '-->' in line:
                         time_line = True
-                        time = line
+                        time = line  # 拿到time
                         continue
                     if time_line:  # 跟寫time_line == True是相同的結果
-                        caption = line
+                        caption = line  # 拿到caption
                         captions[caption] = time  # 這時已經拿到了time、caption了，就把它存到字典
                         time_line = False  # 再把time_line設值為False，再重從開始下個迴圈時，才能繼續再判斷
-            data[caption_file] = captions  # caption_file為key、captions為value
-        pprint(data)
+            yt.captions = captions  # yt.captions 設值為 captions
+
         return data
