@@ -24,4 +24,7 @@ class ReadCaption(Step):
                         time_line = False  # 再把time_line設值為False，再重從開始下個迴圈時，才能繼續再判斷
             yt.captions = captions  # yt.captions 設值為 captions
 
+        print('completed to read captions')
+        print(len(data))
+
         return data

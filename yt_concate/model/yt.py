@@ -9,7 +9,7 @@ class YT:
         self.id = self.get_video_id_from_url(self.url)  # 影片id
         self.caption_filepath = self.get_caption_filepath()  # 字幕檔(絕對路徑)
         self.video_filepath = self.get_video_filepath()  # 影片檔(絕對路徑)
-        self.capiton = None
+        self.captions = None
 
     @staticmethod  # 可以不須要使用self的method
     def get_video_id_from_url(url):  # 拿到video的id

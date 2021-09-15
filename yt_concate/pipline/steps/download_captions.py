@@ -16,16 +16,15 @@ class DownLoadCaptions(Step):
                 print('found existing caption file')
                 continue  # 跳到下一回
 
-            print(url)
             try:
                 source = YouTube(yt.url)
                 en_caption = source.captions.get_by_language_code('a.en')
                 en_caption_convert_to_srt = (en_caption.generate_srt_captions())
-            except (KeyError, AttributeError):
+            except (KeyError, AttributeError, DeprecationWarning):
                 print('Error when downloading caption for', yt.url)
                 continue
             # print(en_caption_convert_to_srt)
-            text_file = open(utils.get_caption_filepath(url), "w", encoding='utf-8')
+            text_file = open(yt.caption_filepath, "w", encoding='utf-8')
             text_file.write(en_caption_convert_to_srt)
             text_file.close()
 

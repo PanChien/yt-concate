@@ -1,3 +1,5 @@
+from pytube import YouTube
+
 from yt_concate.pipline.steps.preflight import Preflight
 from yt_concate.pipline.steps.get_video_list import GetVideoList
 from yt_concate.pipline.steps.initialize_yt import InitializeYT
@@ -16,7 +18,7 @@ CHANNEL_ID = 'UCKSVUHI9rbbkXhvAXK-2uxA'  # 通常不會改變的東西，會使�
 def main():
     inputs = {
         'channel_id': CHANNEL_ID,
-        'search_word': 'incredible',
+        'search_word': 'Music',
     }
 
     # 使用多行式的清單格式時，建議每個後面都加入「,」
@@ -27,7 +29,7 @@ def main():
         DownLoadCaptions(),
         ReadCaption(),
         Search(),
-        DownloadVideos()
+        DownloadVideos(),
         Postflight(),
     ]
 
@@ -41,3 +43,4 @@ def main():
 # 否則會變成是路徑
 if __name__ == '__main__':
     main()
+
