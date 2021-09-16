@@ -3,6 +3,7 @@ import os
 from yt_concate.settings import DOWNLOADS_DIR
 from yt_concate.settings import VIDEOS_DIR
 from yt_concate.settings import CAPTIONS_DIR
+from yt_concate.settings import OUTPUT_DIR
 
 
 class Utils:
@@ -14,6 +15,7 @@ class Utils:
         os.makedirs(DOWNLOADS_DIR, exist_ok=True)  # 使用os的makedirs建立資料夾，第一個為資料夾名，第二個意思為如果有這個資料夾就不再作成資料夾
         os.makedirs(VIDEOS_DIR, exist_ok=True)
         os.makedirs(CAPTIONS_DIR, exist_ok=True)
+        os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     def get_video_list_filepath(self, channel_id):  # 影片清單的路徑重組，return出完整路徑的.txt
         return os.path.join(DOWNLOADS_DIR, channel_id + '.txt')  # 影片檔名使用channel_id命名
@@ -32,3 +34,7 @@ class Utils:
     def video_file_exists(self, yt):  # 檢查影片檔是否存在，而且檔案容量要大於0
         filepath = yt.video_filepath
         return os.path.exists(filepath) and os.path.getsize(filepath) > 0
+
+    def get_output_filepath(self, channel_id, search_word):  # output路徑+檔名重組後回傳
+        filename = channel_id + '_' + search_word + '.mp4'
+        return os.path.join(OUTPUT_DIR, filename)

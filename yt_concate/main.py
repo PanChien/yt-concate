@@ -7,6 +7,7 @@ from yt_concate.pipline.steps.download_captions import DownLoadCaptions
 from yt_concate.pipline.steps.read_caption import ReadCaption
 from yt_concate.pipline.steps.search import Search
 from yt_concate.pipline.steps.download_videos import DownloadVideos
+from yt_concate.pipline.steps.edit_video import EditVideo
 from yt_concate.pipline.steps.postflight import Postflight
 from yt_concate.pipline.steps.step import StepException
 from yt_concate.pipline.pipline import Pipline
@@ -19,6 +20,7 @@ def main():
     inputs = {
         'channel_id': CHANNEL_ID,
         'search_word': 'Music',
+        'limit': 5,
     }
 
     # 使用多行式的清單格式時，建議每個後面都加入「,」
@@ -30,6 +32,7 @@ def main():
         ReadCaption(),
         Search(),
         DownloadVideos(),
+        EditVideo(),
         Postflight(),
     ]
 
